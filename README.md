@@ -44,8 +44,14 @@ ROS# is open source under the Apache 2.0 license and is free for commercial use.
 
 ### Please see the [Wiki](https://github.com/siemens/ros-sharp/wiki) for further info. ###
 
+## Issues: ##
+
+1. In `URDFSharp/URDFImporter/OdomoteryPatcher.cs`, the name of the root node needs to be generalized - either pull it from the urdf, or specify as a requirement that the root node be named "world".
+2. In `URDFSharp/URDFImporterEditor/UrdfImporterEditorWindow.cs`, `urdfAssetPath` needs to be generalized using full path to Project folder (Windows method of finding current folder does not work in Mac OSX).
+
 ---
 
 © Siemens AG, 2017
 
 Author: Dr. Martin Bischoff (martin.bischoff@siemens.com)
+Revised: Rahul B. Warrier (10/21/2017)

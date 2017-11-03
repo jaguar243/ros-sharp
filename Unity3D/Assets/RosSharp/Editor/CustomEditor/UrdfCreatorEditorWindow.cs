@@ -23,6 +23,7 @@ namespace RosSharp.UrdfImporter
 {
     public class UrdfGeneratorEditorWindow
     {
+<<<<<<< HEAD:Unity3D/Assets/RosSharp/Editor/CustomEditor/UrdfCreatorEditorWindow.cs
         [MenuItem("GameObject/3D Object/URDF Model")]
         private static void CreateUrdfObject()
         {
@@ -37,5 +38,11 @@ namespace RosSharp.UrdfImporter
                 RobotCreator.Create(urdfFile);
 
         }
+=======
+        string absolutePathUnityFormat = absolutePath.Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+        if (absolutePathUnityFormat.StartsWith(Application.dataPath, System.StringComparison.CurrentCulture))
+            return "Assets" + absolutePath.Substring(Application.dataPath.Length);
+        else return null;
+>>>>>>> 19ac46aa29430a5095a11f7baf6cc031197aca65:URDFsharp/URDFImporter/StringExtensions.cs
     }
 }

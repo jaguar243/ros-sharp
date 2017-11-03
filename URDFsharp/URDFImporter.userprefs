@@ -1,0 +1,44 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workbench ActiveDocument="URDFImporterEditor/UrdfImporterEditorWindow.cs">
+    <Files>
+      <File FileName="URDFImporter/Urdf.cs" Line="210" Column="11" />
+      <File FileName="URDFImporterEditor/UrdfMeshImporter.cs" Line="25" Column="21" />
+      <File FileName="URDFImporterEditor/UrdfImporterEditorWindow.cs" Line="139" Column="13" />
+      <File FileName="../../../../Library/Frameworks/Mono.framework/Versions/5.2.0/lib/mono/msbuild/15.0/bin/Microsoft.Common.CurrentVersion.targets" Line="2001" Column="5" />
+      <File FileName="URDFImporterEditor/UrdfGeneratorEditorWindow.cs" Line="1" Column="1" />
+      <File FileName="URDFImporterEditor/ExportUrdfAssetPackage.cs" Line="33" Column="36" />
+      <File FileName="URDFImporter/StringExtensions.cs" Line="30" Column="20" />
+      <File FileName="URDFImporter/TransformExtensions.cs" Line="1" Column="1" />
+      <File FileName="URDFImporter/XAttributeExtensions.cs" Line="1" Column="1" />
+      <File FileName="URDFImporter/JointStateManager.cs" Line="1" Column="1" />
+      <File FileName="URDFImporter/JointStatePatcher.cs" Line="1" Column="1" />
+      <File FileName="URDFImporter/JointStateSubscriber.cs" Line="1" Column="1" />
+      <File FileName="URDFImporter/KinematicPatcher.cs" Line="1" Column="1" />
+      <File FileName="URDFImporter/OdometryPatcher.cs" Line="24" Column="54" />
+      <File FileName="URDFImporter/OdometryTransformManager.cs" Line="1" Column="1" />
+      <File FileName="URDFImporter/SpotLightManager.cs" Line="1" Column="1" />
+      <File FileName="URDFImporter/RosConnector.cs" Line="1" Column="1" />
+      <File FileName="URDFImporter/SpotLightPatcher.cs" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="URDFImporter" expanded="True">
+            <Node name="URDFImporter" expanded="True">
+              <Node name="References" expanded="True" />
+            </Node>
+            <Node name="URDFImporterEditor" expanded="True">
+              <Node name="UrdfImporterEditorWindow.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+</Properties>

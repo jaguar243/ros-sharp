@@ -19,7 +19,14 @@ using UnityEngine;
 
 namespace RosSharp
 {
+<<<<<<< HEAD:Unity3D/Assets/RosSharp/Scripts/OdometryTransformManager.cs
     public class OdometryTransformManager : MonoBehaviour
+=======
+
+    private static string OdometryObjectName = "world";
+
+    public static void patch(GameObject UrdfModel)
+>>>>>>> 19ac46aa29430a5095a11f7baf6cc031197aca65:URDFsharp/URDFImporter/OdometryPatcher.cs
     {
         private Vector3 position;
         private Quaternion rotation;

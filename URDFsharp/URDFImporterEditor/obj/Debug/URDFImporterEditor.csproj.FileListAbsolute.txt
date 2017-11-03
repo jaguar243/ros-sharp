@@ -1,0 +1,11 @@
+/Users/warriermac/ros-sharp/URDFsharp/URDFImporterEditor/bin/Debug/URDFImporterEditor.dll
+/Users/warriermac/ros-sharp/URDFsharp/URDFImporterEditor/bin/Debug/URDFImporterEditor.pdb
+/Users/warriermac/ros-sharp/URDFsharp/URDFImporterEditor/bin/Debug/RosBridgeClient.dll
+/Users/warriermac/ros-sharp/URDFsharp/URDFImporterEditor/bin/Debug/UnityEditor.dll
+/Users/warriermac/ros-sharp/URDFsharp/URDFImporterEditor/bin/Debug/UnityEngine.dll
+/Users/warriermac/ros-sharp/URDFsharp/URDFImporterEditor/bin/Debug/URDFImporter.dll
+/Users/warriermac/ros-sharp/URDFsharp/URDFImporterEditor/bin/Debug/URDFImporter.pdb
+/Users/warriermac/ros-sharp/URDFsharp/URDFImporterEditor/obj/Debug/URDFImporterEditor.csprojResolveAssemblyReference.cache
+/Users/warriermac/ros-sharp/URDFsharp/URDFImporterEditor/obj/Debug/URDFImporterEditor.csproj.CoreCompileInputs.cache
+/Users/warriermac/ros-sharp/URDFsharp/URDFImporterEditor/obj/Debug/URDFImporterEditor.dll
+/Users/warriermac/ros-sharp/URDFsharp/URDFImporterEditor/obj/Debug/URDFImporterEditor.pdb

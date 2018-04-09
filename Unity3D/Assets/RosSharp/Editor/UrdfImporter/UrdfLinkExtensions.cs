@@ -35,6 +35,9 @@ namespace RosSharp.UrdfImporter
                 if (joint != null)
                     joint.Create(gameObject, parent);
             }
+            else if (joint != null)
+                Debug.LogWarning("No Joint Component will be created in GameObject \"" + gameObject.name + "\" as it has no Rigidbody Component.\n"
+                    + "Please define an Inertial for Link \"" + link.name + "\" in the URDF file to create a Rigidbody Component.\n");
 
             GameObject visualGameObject = new GameObject("Visuals");
             visualGameObject.transform.SetParentAndAlign(gameObject.transform);
@@ -60,29 +63,23 @@ namespace RosSharp.UrdfImporter
         public static Rigidbody Create(this Link.Inertial inertial, GameObject gameObject)
         {
             Rigidbody rigidbody = gameObject.AddComponent<Rigidbody>();
+            rigidbody.mass = (float)inertial.mass;
 
             if (inertial.origin != null)
                 rigidbody.centerOfMass = inertial.origin.GetPosition();
 
-            // todo: apply inertail rotation for inertia
-            rigidbody.mass = (float)inertial.mass;
             inertial.inertia.SetInertia(rigidbody);
+
+            RigidbodyUrdfDataManager rigidbodyUrdfDataManager
+                = gameObject.AddComponent<RigidbodyUrdfDataManager>();
+
+            rigidbodyUrdfDataManager.GetValuesFromUrdf(
+                rigidbody.centerOfMass,
+                rigidbody.inertiaTensor,
+                rigidbody.inertiaTensorRotation);
+            rigidbodyUrdfDataManager.UseUrdfData = true;
+
             return rigidbody;
-        }
-    }
-
-    public static class UrdfLinkInertialInertiaExtensions
-    {
-        private static double imin = 1e-6;
-        public static void SetInertia(this Link.Inertial.Inertia inertia, Rigidbody rigidbody)
-        {
-            // todo: diagonalize matrix and convert transform matrix (i.e. rotation matrix) to quaternion
-            float ixx = (float)((inertia.ixx > imin) ? inertia.ixx : imin);
-            float iyy = (float)((inertia.iyy > imin) ? inertia.iyy : imin);
-            float izz = (float)((inertia.izz > imin) ? inertia.izz : imin);
-
-            rigidbody.inertiaTensor = new Vector3(ixx, iyy, izz);
-            // rigidbody.inertiaTensorRotation // todo: set inertiaRotation here
         }
     }
 

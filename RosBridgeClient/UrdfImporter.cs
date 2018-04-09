@@ -1,13 +1,11 @@
 ﻿/*
-© Siemens AG, 2017
+© Siemens AG, 2017-2018
 Author: Dr. Martin Bischoff (martin.bischoff@siemens.com)
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
-
 <http://www.apache.org/licenses/LICENSE-2.0>.
-
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -80,9 +78,15 @@ namespace RosSharp.RosBridgeClient
 
         public bool Import(int maxTimeOut = int.MaxValue)
         {
+<<<<<<< HEAD
             rosSocket.CallService("/rosapi/get_param", typeof(ParamValueString), ReceiveRobotName, new ParamName("/robot/name"));
             ServiceReceiver robotDescriptionReceiver = new ServiceReceiver(rosSocket, "/rosapi/get_param", new ParamName("/robot_description"), "/robot_description.urdf", typeof(ParamValueString));
             robotDescriptionReceiver.ReceiveEventHandler += ReceiveRobotDescription;
+=======
+            rosSocket.CallService("/rosapi/get_param", typeof(ParamValueString), receiveRobotName, new ParamName("/robot/name"));
+            ServiceReceiver robotDescriptionReceiver = new ServiceReceiver(rosSocket, "/rosapi/get_param", new ParamName("/robot_description"), Path.DirectorySeparatorChar + "robot_description.urdf", typeof(ParamValueString));
+            robotDescriptionReceiver.ReceiveEventHandler += receiveRobotDescription;
+>>>>>>> siemens-master
 
             return (WaitHandle.WaitAll(Status.Values.ToArray(), maxTimeOut));
         }
@@ -136,16 +140,27 @@ namespace RosSharp.RosBridgeClient
 
         private void ReceiveResourceFile(ServiceReceiver serviceReceiver, object serviceResponse)
         {
+<<<<<<< HEAD
             string fileContents = System.Text.Encoding.UTF8.GetString(((ParamValueByte)serviceResponse).value);
 
+=======
+            byte[] fileContents = ((ParamValueByte)serviceResponse).value;
+>>>>>>> siemens-master
             Uri resourceFileUri = new Uri(((ParamName)serviceReceiver.ServiceParameter).name);
 
             if (IsColladaFile(resourceFileUri))
             {
+<<<<<<< HEAD
                 Thread importResourceFilesThread = new Thread(() => ImportDaeTextureFiles(resourceFileUri, fileContents));
                 importResourceFilesThread.Start();
             }
             Thread writeTextFileThread = new Thread(() => WriteTextFile((string)serviceReceiver.HandlerParameter, fileContents));
+=======
+                Thread importResourceFilesThread = new Thread(() => importDaeTextureFiles(resourceFileUri, System.Text.Encoding.UTF8.GetString(fileContents)));
+                importResourceFilesThread.Start();
+            }
+            Thread writeTextFileThread = new Thread(() => writeBinaryResponseToFile((string)serviceReceiver.HandlerParameter, fileContents));
+>>>>>>> siemens-master
             writeTextFileThread.Start();
 
             UpdateFileRequestStatus(resourceFileUri);
@@ -172,8 +187,11 @@ namespace RosSharp.RosBridgeClient
 
         private List<Uri> ReadDaeTextureUris(Uri resourceFileUri, string fileContents)
         {
+            XNamespace xmlns = "http://www.collada.org/2005/11/COLLADASchema";
             XElement root = XElement.Parse(fileContents);
-            return (from x in root.Elements() where x.Name.LocalName == "library_images" select new Uri(resourceFileUri, x.Value)).ToList();
+            return (from x in root.Elements()
+                    where x.Name.LocalName == "library_images"
+                    select new Uri(resourceFileUri, x.Element(xmlns + "image").Element(xmlns + "init_from").Value)).ToList();
         }
 
         private void ReceiveTextureFiles(ServiceReceiver serviceReceiver, object serviceResponse)
@@ -185,14 +203,14 @@ namespace RosSharp.RosBridgeClient
         private void WriteBinaryResponseToFile(string relativeLocalFilename, byte[] fileContents)
         {
             string filename = LocalDirectory + relativeLocalFilename;
-            System.IO.Directory.CreateDirectory(Path.GetDirectoryName(filename));
+            Directory.CreateDirectory(Path.GetDirectoryName(filename));
             File.WriteAllBytes(filename, fileContents);
         }
 
         private void WriteTextFile(string relativeLocalFilename, string fileContents)
         {
             string filename = LocalDirectory + relativeLocalFilename;
-            System.IO.Directory.CreateDirectory(Path.GetDirectoryName(filename));
+            Directory.CreateDirectory(Path.GetDirectoryName(filename));
             File.WriteAllText(filename, fileContents);
         }
 

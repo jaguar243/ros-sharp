@@ -23,31 +23,29 @@ namespace RosSharp.UrdfImporter
     public static class UrdfLinkGeometryMeshExtensions
     {
         public static GameObject CreateVisual(this Link.Geometry.Mesh mesh, GameObject parent)
-        {
-            string assetPath = UrdfAssetDatabase.GetAssetPathFromPackagePath(mesh.filename);
-            GameObject gameObject = Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>(assetPath));
-            gameObject.transform.SetParentAndAlign(parent.transform);
+        {            
+            GameObject gameObject = Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>(UrdfAssetDatabase.GetAssetPathFromPackagePath(mesh.filename)));
             mesh.setScale(gameObject);
+            gameObject.transform.SetParentAndAlign(parent.transform);            
             return gameObject;
         }
 
         public static GameObject CreateCollider(this Link.Geometry.Mesh mesh, GameObject parent)
         {
-            GameObject gameObject = new GameObject(mesh.filename + "(MeshCollider)");
-            GameObject reference = AssetDatabase.LoadAssetAtPath<GameObject>(UrdfAssetDatabase.GetAssetPathFromPackagePath(mesh.filename));
-            gameObject.transform.position = reference.transform.position;
-            gameObject.transform.rotation = reference.transform.rotation;
-            gameObject.transform.localScale = reference.transform.localScale;
+            GameObject gameObject = Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>(UrdfAssetDatabase.GetAssetPathFromPackagePath(mesh.filename)));
 
-            MeshFilter[] meshFilters = reference.GetComponentsInChildren<MeshFilter>();
+            MeshFilter[] meshFilters = gameObject.GetComponentsInChildren<MeshFilter>();
             foreach (MeshFilter meshFilter in meshFilters)
             {
-                MeshCollider meshCollider = gameObject.AddComponent<MeshCollider>();
-                meshCollider.sharedMesh = meshFilter.sharedMesh;            
+                GameObject child = meshFilter.gameObject;
+                MeshCollider meshCollider = child.AddComponent<MeshCollider>();
+                meshCollider.sharedMesh = meshFilter.sharedMesh;
+                Object.DestroyImmediate(child.GetComponent<MeshRenderer>());
+                Object.DestroyImmediate(meshFilter);
+                
             }
-            gameObject.transform.SetParentAndAlign(parent.transform);
             mesh.setScale(gameObject);
-
+            gameObject.transform.SetParentAndAlign(parent.transform);            
             return gameObject;
         }
 
@@ -57,8 +55,8 @@ namespace RosSharp.UrdfImporter
             {
                 Vector3 scale = new Vector3((float)mesh.scale[0], (float)mesh.scale[1], (float)mesh.scale[2]);
                 gameObject.transform.localScale = Vector3.Scale(gameObject.transform.localScale, scale);
+                gameObject.transform.localPosition = Vector3.Scale(gameObject.transform.localPosition, scale);
             }
-
         }
     }
 }
